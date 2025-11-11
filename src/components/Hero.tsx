@@ -16,32 +16,14 @@ const Hero = () => {
           
           <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
           
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-10 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm shadow-lg mb-4 border border-eco-green/30">
-              <Sparkles className="w-4 h-4 text-eco-green" />
-              <span className="text-sm font-bold text-foreground">Learn & Have Fun!</span>
-            </div>
-            
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 leading-tight drop-shadow-lg">
-              Eco Heroes Story Library
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 lg:p-12 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-2xl">
+              Let's Save the Planet Together! 🌍
             </h1>
             
-            <p className="text-base md:text-lg text-foreground max-w-2xl mx-auto mb-6 drop-shadow-md font-medium">
-              Join our colorful friends on amazing recycling adventures! 
-              Learn how to take care of our planet, one story at a time.
+            <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto drop-shadow-lg font-semibold">
+              Pick a story and become an Eco Hero! ♻️✨
             </p>
-            
-            <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs md:text-sm">
-              <div className="px-3 md:px-4 py-2 rounded-full bg-eco-green text-white font-bold shadow-lg">
-                🌱 Fun Stories
-              </div>
-              <div className="px-3 md:px-4 py-2 rounded-full bg-eco-blue text-white font-bold shadow-lg">
-                ♻️ Learn Recycling
-              </div>
-              <div className="px-3 md:px-4 py-2 rounded-full bg-eco-yellow text-white font-bold shadow-lg">
-                🌍 Save Earth
-              </div>
-            </div>
           </div>
         </div>
       </div>
