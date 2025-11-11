@@ -1,9 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { BookOpen, Menu, X } from "lucide-react";
+import { BookOpen, Menu, X, Search } from "lucide-react";
 import { useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
+import SearchDialog from "@/components/SearchDialog";
 
-const Header = () => {
+interface Book {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
+
+interface HeaderProps {
+  books: Book[];
+  onBookClick: (bookTitle: string) => void;
+}
+
+const Header = ({ books, onBookClick }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -35,37 +51,52 @@ const Header = () => {
               onClick={() => scrollToSection('about-section')}
               className="text-muted-foreground hover:text-foreground transition-colors font-medium"
             >
-              About
+              About Us
             </button>
             <button
-              onClick={() => scrollToSection('parents-section')}
+              onClick={() => scrollToSection('contact-section')}
               className="text-muted-foreground hover:text-foreground transition-colors font-medium"
             >
-              For Parents
+              Contact Us
             </button>
           </nav>
 
-          {/* CTA Button (Desktop) */}
-          <div className="hidden md:block">
+          {/* Actions (Desktop) */}
+          <div className="hidden md:flex items-center gap-2">
             <Button
-              onClick={() => scrollToSection('stories-section')}
-              className="bg-eco-green hover:bg-eco-green/90 text-white font-semibold"
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsSearchOpen(true)}
+              className="w-9 h-9"
             >
-              Start Reading
+              <Search className="h-5 w-5 text-foreground" />
+              <span className="sr-only">Search stories</span>
             </Button>
+            <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
-          </button>
+          {/* Mobile Actions */}
+          <div className="flex md:hidden items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsSearchOpen(true)}
+              className="w-9 h-9"
+            >
+              <Search className="h-5 w-5 text-foreground" />
+            </Button>
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-foreground" />
+              ) : (
+                <Menu className="w-6 h-6 text-foreground" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -81,23 +112,24 @@ const Header = () => {
               onClick={() => scrollToSection('about-section')}
               className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors font-medium"
             >
-              About
+              About Us
             </button>
             <button
-              onClick={() => scrollToSection('parents-section')}
+              onClick={() => scrollToSection('contact-section')}
               className="block w-full text-left px-4 py-2 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-colors font-medium"
             >
-              For Parents
+              Contact Us
             </button>
-            <Button
-              onClick={() => scrollToSection('stories-section')}
-              className="w-full bg-eco-green hover:bg-eco-green/90 text-white font-semibold"
-            >
-              Start Reading
-            </Button>
           </nav>
         )}
       </div>
+
+      <SearchDialog
+        books={books}
+        open={isSearchOpen}
+        onOpenChange={setIsSearchOpen}
+        onBookSelect={onBookClick}
+      />
     </header>
   );
 };

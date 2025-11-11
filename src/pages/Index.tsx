@@ -79,7 +79,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header books={books} onBookClick={handleBookClick} />
       <div id="hero-section">
         <Hero />
       </div>
