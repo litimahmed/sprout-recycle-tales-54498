@@ -14,6 +14,7 @@ export interface StoryPage {
 export interface Story {
   id: number;
   title: string;
+  description: string;
   pages: StoryPage[];
 }
 
@@ -21,6 +22,7 @@ export const storyContent: Story[] = [
   {
     id: 1,
     title: "The Sorting Bins Adventure",
+    description: "In a vibrant community, three colorful bins share the importance of sorting, helping others, and the magic of turning waste into treasure. Together, they create a Treasure Map of Help that reveals the true value of teamwork and caring for our planet.",
     pages: [
       {
         image: bookSortingBins,
@@ -55,6 +57,7 @@ export const storyContent: Story[] = [
   {
     id: 2,
     title: "Captain Earth Saves the Day",
+    description: "When pollution threatens the planet, one young hero discovers amazing recycling powers! Join Captain Earth as he transforms trash into treasure and inspires children everywhere to become environmental superheroes.",
     pages: [
       {
         image: bookEarthHero,
@@ -89,6 +92,7 @@ export const storyContent: Story[] = [
   {
     id: 3,
     title: "Kids Who Care",
+    description: "Four best friends discover their beloved park covered in litter and decide to take action! Watch as Maya, Josh, Aisha, and Leo organize a community cleanup that transforms their neighborhood and inspires everyone around them.",
     pages: [
       {
         image: bookKidsRecycling,
@@ -126,6 +130,7 @@ export const storyContent: Story[] = [
   {
     id: 4,
     title: "The Amazing Bottle Journey",
+    description: "Follow Bella the plastic bottle on an incredible adventure through the recycling process! From the recycling bin to becoming a cozy fleece jacket, discover how everyday items can be transformed into something wonderful.",
     pages: [
       {
         image: bookBottleJourney,
@@ -168,6 +173,7 @@ export const storyContent: Story[] = [
   {
     id: 5,
     title: "Compost Magic",
+    description: "Join Coco the Carrot and the Decomposer Squad as they discover the magical transformation that happens in a compost bin! Learn how food scraps become nutrient-rich soil that helps new plants grow in this delightful tale of nature's recycling.",
     pages: [
       {
         image: bookCompostMagic,
@@ -210,6 +216,7 @@ export const storyContent: Story[] = [
   {
     id: 6,
     title: "Paper Friends Forever",
+    description: "Meet Paige the Paper and her recycling friends on an amazing journey from used notebook to brand new paper! Discover how recycling paper saves trees and gives every sheet a chance to tell new stories.",
     pages: [
       {
         image: bookPaperFriends,

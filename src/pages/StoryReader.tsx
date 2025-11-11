@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Volume2, Share2, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Volume2, Share2, Clock, Tag, Download, Edit } from "lucide-react";
 import { toast } from "sonner";
 import { storyContent } from "@/data/storyContent";
 
@@ -54,6 +54,14 @@ const StoryReader = () => {
   const thumbnailImage = story.pages.find(page => page.image)?.image || "";
   const estimatedReadTime = Math.ceil(story.pages.length * 1.5); // ~1.5 min per page
 
+  const handleDownloadPDF = () => {
+    toast.success("PDF download will be available soon!");
+  };
+
+  const handleCustomize = () => {
+    toast.success("Story customization coming soon!");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
@@ -95,41 +103,65 @@ const StoryReader = () => {
         </div>
       </header>
 
-      {/* Hero Banner Section */}
-      <section className="relative w-full bg-gradient-to-br from-eco-blue/10 via-background to-eco-green/10">
-        <div className="container mx-auto px-4 py-12 md:py-16">
-          <div className="max-w-4xl mx-auto">
-            {/* Story Title & Meta */}
-            <div className="text-center mb-8">
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground font-fredoka mb-4">
-                {story.title}
-              </h1>
-              
-              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{estimatedReadTime} min read</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Tag className="h-4 w-4" />
-                  <span>Age 4-8</span>
-                </div>
-              </div>
+      {/* Hero Banner Section with Dark Background */}
+      <section className="relative w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40" />
+        
+        <div className="relative container mx-auto px-4 py-16 md:py-24">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Story Title */}
+            <h1 className="text-4xl md:text-6xl font-bold text-white font-fredoka mb-6">
+              {story.title}
+            </h1>
+            
+            {/* Story Description */}
+            <p className="text-lg md:text-xl text-white/90 font-fredoka leading-relaxed mb-8 max-w-3xl mx-auto">
+              {story.description}
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+              <Button
+                onClick={handleDownloadPDF}
+                size="lg"
+                className="gap-2 bg-eco-green hover:bg-eco-green/90 text-white"
+              >
+                <Download className="h-5 w-5" />
+                Download story to PDF
+              </Button>
+              <Button
+                onClick={handleCustomize}
+                size="lg"
+                variant="outline"
+                className="gap-2 bg-white/10 border-white/30 text-white hover:bg-white/20"
+              >
+                <Edit className="h-5 w-5" />
+                Customize your book
+              </Button>
             </div>
 
-            {/* Thumbnail Image */}
-            {thumbnailImage && (
-              <div className="relative w-full max-w-2xl mx-auto rounded-lg overflow-hidden shadow-2xl">
-                <img
-                  src={thumbnailImage}
-                  alt={story.title}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            )}
+            {/* Button descriptions */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-white/70">
+              <span>Ideal for reading or printing this story</span>
+              <span>Base this story on your situation</span>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Thumbnail Image Section */}
+      {thumbnailImage && (
+        <section className="container mx-auto px-4 -mt-12 md:-mt-16 mb-12">
+          <div className="relative w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl border-8 border-white">
+            <img
+              src={thumbnailImage}
+              alt={story.title}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </section>
+      )}
 
       {/* Story Content */}
       <article className="container mx-auto px-4 py-12 max-w-3xl">
