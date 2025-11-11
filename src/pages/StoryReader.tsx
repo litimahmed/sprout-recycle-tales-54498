@@ -1,200 +1,222 @@
+import React, { useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ChevronLeft, ChevronRight, Share2, Volume2, ChevronDown, ChevronUp } from "lucide-react";
-import { storyContent } from "@/data/storyContent";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { ArrowLeft, Volume2, Share2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
+import { storyContent } from "@/data/storyContent";
+
+// Page component for flipbook
+const StoryPage = React.forwardRef<HTMLDivElement, { page: { image?: string; text: string }; pageNumber: number }>((props, ref) => {
+  return (
+    <div className="w-full h-full bg-card" ref={ref}>
+      <div className="w-full h-full flex">
+        {/* Image on left (if available) */}
+        {props.page.image ? (
+          <>
+            <div className="w-1/2 h-full">
+              <img
+                src={props.page.image}
+                alt={`Page ${props.pageNumber}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Text on right */}
+            <div className="w-1/2 h-full p-6 md:p-12 flex flex-col items-center justify-center bg-card">
+              <p className="text-base md:text-2xl text-foreground font-fredoka leading-relaxed text-center">
+                {props.page.text}
+              </p>
+              <p className="text-sm text-muted-foreground mt-6 font-fredoka">
+                Page {props.pageNumber}
+              </p>
+            </div>
+          </>
+        ) : (
+          /* Full width text when no image */
+          <div className="w-full h-full p-8 md:p-16 flex flex-col items-center justify-center bg-card">
+            <p className="text-lg md:text-2xl text-foreground font-fredoka leading-relaxed text-center max-w-2xl">
+              {props.page.text}
+            </p>
+            <p className="text-sm text-muted-foreground mt-8 font-fredoka">
+              Page {props.pageNumber}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+StoryPage.displayName = "StoryPage";
 
 const StoryReader = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
-  const bookRef = useRef<any>(null);
-  const [isToolbarExpanded, setIsToolbarExpanded] = useState(false);
+  const flipBookRef = useRef<any>(null);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isNarratorActive, setIsNarratorActive] = useState(false);
+  const [isToolbarExpanded, setIsToolbarExpanded] = useState(true);
 
   const story = storyContent.find((s) => s.id === Number(id));
 
   if (!story) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="h-screen w-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Story not found</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-4">Story not found</h1>
           <Button onClick={() => navigate("/")}>Go Home</Button>
         </div>
       </div>
     );
   }
 
-  const flipNext = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipNext();
-    }
-  };
-
-  const flipPrev = () => {
-    if (bookRef.current) {
-      bookRef.current.pageFlip().flipPrev();
-    }
-  };
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: story.title,
-        text: `Check out this eco-friendly story: ${story.title}`,
-        url: window.location.href,
-      }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
-    }
-  };
-
-  const toggleNarrator = () => {
+  const handleNarrator = () => {
     setIsNarratorActive(!isNarratorActive);
-    toast.info(isNarratorActive ? "Narrator turned off" : "Narrator turned on");
+    toast.success(
+      isNarratorActive ? "Narrator turned off" : "Narrator turned on"
+    );
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: story.title,
+      text: `Check out this eco-friendly story: ${story.title}`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        toast.success("Story shared successfully!");
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.success("Link copied to clipboard!");
+      }
+    } catch (err) {
+      toast.error("Failed to share story");
+    }
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-eco-blue/10 via-background to-eco-green/10 flex flex-col overflow-hidden">
+    <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-background via-background to-muted overflow-hidden">
       {/* Collapsible Toolbar */}
-      <div className="relative z-50">
-        <div className={`bg-card shadow-lg border-b border-border transition-all duration-300 ${isToolbarExpanded ? 'pb-4' : 'pb-2'}`}>
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between py-3">
+      <div 
+        className={`w-full bg-background/95 backdrop-blur border-b border-border transition-all duration-300 z-10 ${
+          isToolbarExpanded ? "h-auto" : "h-14"
+        }`}
+      >
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/")}
+              className="gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Back
+            </Button>
+
+            <h1 className="text-xl md:text-2xl font-bold text-foreground font-fredoka">
+              {story.title}
+            </h1>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsToolbarExpanded(!isToolbarExpanded)}
+            >
+              {isToolbarExpanded ? (
+                <ChevronUp className="h-5 w-5" />
+              ) : (
+                <ChevronDown className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+
+          {isToolbarExpanded && (
+            <div className="flex items-center justify-center gap-3 mt-4 pb-2 flex-wrap">
               <Button
-                variant="ghost"
+                variant={isNarratorActive ? "default" : "outline"}
                 size="sm"
-                onClick={() => navigate("/")}
-                className="gap-2 hover:bg-muted"
+                onClick={handleNarrator}
+                className="gap-2"
               >
-                <ArrowLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Back</span>
+                <Volume2 className="h-4 w-4" />
+                Narrator
               </Button>
-              
-              <h1 className="text-lg sm:text-xl font-bold text-foreground font-kids text-center flex-1 mx-4">{story.title}</h1>
-              
+
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                onClick={() => setIsToolbarExpanded(!isToolbarExpanded)}
-                className="gap-1"
+                onClick={handleShare}
+                className="gap-2"
               >
-                {isToolbarExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                <Share2 className="h-4 w-4" />
+                Share
               </Button>
-            </div>
-            
-            {/* Expanded toolbar content */}
-            {isToolbarExpanded && (
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-2 border-t border-border mt-2 animate-in slide-in-from-top-2">
-                <Button
-                  variant={isNarratorActive ? "default" : "outline"}
-                  size="sm"
-                  onClick={toggleNarrator}
-                  className="gap-2"
-                >
-                  <Volume2 className="w-4 h-4" />
-                  Narrator
-                </Button>
-                
+
+              <div className="flex items-center gap-2 ml-4">
                 <Button
                   variant="outline"
-                  size="sm"
-                  onClick={handleShare}
-                  className="gap-2"
+                  size="icon"
+                  onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
+                  disabled={currentPage === 0}
                 >
-                  <Share2 className="w-4 h-4" />
-                  Share
+                  <ChevronLeft className="h-4 w-4" />
                 </Button>
+                
+                <span className="text-sm text-muted-foreground min-w-[80px] text-center">
+                  Page {currentPage + 1} / {story.pages.length}
+                </span>
 
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={flipPrev}
-                    className="gap-1"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    <span className="hidden sm:inline">Previous</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={flipNext}
-                    className="gap-1"
-                  >
-                    <span className="hidden sm:inline">Next</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => flipBookRef.current?.pageFlip().flipNext()}
+                  disabled={currentPage === story.pages.length - 1}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Book Container - Full Screen */}
-      <div className="flex-1 flex items-center justify-center p-4 overflow-hidden">
-        <div className="relative w-full h-full flex items-center justify-center">
-          <HTMLFlipBook
-            ref={bookRef}
-            width={isMobile ? Math.min(window.innerWidth - 32, 400) : Math.min(window.innerWidth * 0.4, 600)}
-            height={isMobile ? Math.min(window.innerHeight - 200, 500) : Math.min(window.innerHeight - 180, 700)}
-            size="stretch"
-            minWidth={300}
-            maxWidth={1200}
-            minHeight={400}
-            maxHeight={900}
-            drawShadow={true}
-            flippingTime={800}
-            usePortrait={isMobile}
-            startPage={0}
-            className="story-book"
-            style={{}}
-            maxShadowOpacity={0.5}
-            showCover={true}
-            mobileScrollSupport={true}
-            startZIndex={0}
-            autoSize={false}
-            clickEventForward={true}
-            useMouseEvents={true}
-            swipeDistance={30}
-            showPageCorners={true}
-            disableFlipByClick={false}
-          >
-            {story.pages.map((page, index) => (
-              <div key={index} className="page bg-card">
-                <div className="page-content h-full flex p-0 overflow-hidden">
-                  {/* Left side - Image */}
-                  {page.image && (
-                    <div className="w-1/2 flex items-center justify-center bg-gradient-to-br from-eco-green/5 to-eco-blue/5 p-6">
-                      <img
-                        src={page.image}
-                        alt={page.altText || `Story illustration ${index + 1}`}
-                        className="max-w-full max-h-full object-contain rounded-lg shadow-md"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* Right side - Content */}
-                  <div className={`${page.image ? 'w-1/2' : 'w-full'} flex flex-col justify-between p-6 md:p-8`}>
-                    <div className="flex-1 flex items-center">
-                      <p className="text-foreground text-base md:text-xl leading-relaxed font-kids font-medium">
-                        {page.text}
-                      </p>
-                    </div>
-                    <div className="text-center text-sm text-muted-foreground mt-4 font-kids">
-                      Page {index + 1} of {story.pages.length}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </HTMLFlipBook>
-        </div>
+      {/* FlipBook - Full page */}
+      <div className="flex-1 flex items-center justify-center overflow-hidden bg-gradient-to-br from-eco-blue/5 via-background to-eco-green/5">
+        <HTMLFlipBook
+          width={650}
+          height={850}
+          size="stretch"
+          minWidth={300}
+          maxWidth={1400}
+          minHeight={400}
+          maxHeight={1000}
+          showCover={true}
+          mobileScrollSupport={true}
+          onFlip={(e) => setCurrentPage(e.data)}
+          className="shadow-2xl"
+          ref={flipBookRef}
+          startPage={0}
+          drawShadow={true}
+          flippingTime={800}
+          usePortrait={false}
+          startZIndex={0}
+          autoSize={false}
+          maxShadowOpacity={0.5}
+          showPageCorners={true}
+          disableFlipByClick={false}
+          clickEventForward={true}
+          useMouseEvents={true}
+          swipeDistance={30}
+          style={{}}
+        >
+          {story.pages.map((page, index) => (
+            <StoryPage key={index} page={page} pageNumber={index + 1} />
+          ))}
+        </HTMLFlipBook>
       </div>
     </div>
   );

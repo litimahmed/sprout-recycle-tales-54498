@@ -123,19 +123,11 @@ All colors MUST be HSL.
 }
 
 /* Story page flip styles */
-.story-book {
-  margin: 0 auto;
-  box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.3);
+.stf__parent {
+  margin: auto !important;
 }
 
-.page {
-  @apply shadow-2xl;
-  background: hsl(var(--card));
-  border: 2px solid hsl(var(--border));
-  overflow: hidden;
-}
-
-.page-content {
-  @apply text-card-foreground;
+.stf__wrapper {
+  margin: auto !important;
 }
 
