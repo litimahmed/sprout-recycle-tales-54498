@@ -9,6 +9,13 @@ export interface StoryPage {
   text: string;
   image?: string;
   altText?: string;
+  layout?: "default" | "two-column-left" | "two-column-right";
+}
+
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctAnswer: number;
 }
 
 export interface Story {
@@ -16,6 +23,7 @@ export interface Story {
   title: string;
   description: string;
   pages: StoryPage[];
+  quiz?: QuizQuestion[];
 }
 
 export const storyContent: Story[] = [
@@ -23,6 +31,33 @@ export const storyContent: Story[] = [
     id: 1,
     title: "The Sorting Bins Adventure",
     description: "In a vibrant community, three colorful bins share the importance of sorting, helping others, and the magic of turning waste into treasure. Together, they create a Treasure Map of Help that reveals the true value of teamwork and caring for our planet.",
+    quiz: [
+      {
+        question: "What are the names of the three bins?",
+        options: ["Benny, Gary, and Olivia", "Billy, George, and Oscar", "Bobby, Greg, and Ollie", "Ben, Gerry, and Owen"],
+        correctAnswer: 0
+      },
+      {
+        question: "What color is the bin for paper?",
+        options: ["Green", "Orange", "Blue", "Yellow"],
+        correctAnswer: 2
+      },
+      {
+        question: "What does Gary the Green Bin collect?",
+        options: ["Plastic bottles", "Food scraps and yard waste", "Paper", "Metal cans"],
+        correctAnswer: 1
+      },
+      {
+        question: "What did the bins do to teach the children?",
+        options: ["Made a video", "Wrote a book", "Sang a song", "Drew pictures"],
+        correctAnswer: 2
+      },
+      {
+        question: "What happened by the end of the story?",
+        options: ["The park closed", "Children became recycling champions", "The bins moved away", "Nothing changed"],
+        correctAnswer: 1
+      }
+    ],
     pages: [
       {
         image: bookSortingBins,
@@ -34,6 +69,9 @@ export const storyContent: Story[] = [
       },
       {
         text: "Gary jumped up excitedly. 'I can help! I love food scraps and yard waste. They turn into rich soil that helps flowers grow!' His green body shimmered in the sunlight.",
+        image: bookSortingBins,
+        altText: "Gary the Green Bin in the park",
+        layout: "two-column-right"
       },
       {
         image: bookSortingBins,
@@ -42,6 +80,9 @@ export const storyContent: Story[] = [
       },
       {
         text: "The three friends decided to put on a show for the children. They sang a catchy song: 'Blue for paper, Green for food, Orange for plastic - we're doing good!'",
+        image: bookSortingBins,
+        altText: "Three bins singing together",
+        layout: "two-column-left"
       },
       {
         text: "The children loved learning about recycling! They started sorting their waste properly. Each piece of trash found its perfect home in the right bin.",

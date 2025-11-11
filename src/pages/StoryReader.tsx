@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Volume2, Share2, Clock, Tag, Download, Edit } from "lucide-react";
 import { toast } from "sonner";
 import { storyContent } from "@/data/storyContent";
+import StoryRating from "@/components/StoryRating";
+import StoryQuiz from "@/components/StoryQuiz";
 
 const StoryReader = () => {
   const { id } = useParams();
@@ -157,45 +159,78 @@ const StoryReader = () => {
             <img
               src={thumbnailImage}
               alt={story.title}
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover max-h-[400px]"
             />
           </div>
         </section>
       )}
 
       {/* Story Content */}
-      <article className="container mx-auto px-4 py-12 max-w-3xl">
+      <article className="container mx-auto px-4 py-12 max-w-5xl">
         <div className="prose prose-lg max-w-none">
-          {story.pages.map((page, index) => (
-            <div key={index} className="mb-12">
-              {/* Chapter heading for pages with images */}
-              {page.image && index > 0 && (
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
-                  Chapter {index}
-                </h2>
-              )}
-
-              {/* Page Image */}
-              {page.image && index > 0 && (
-                <div className="mb-6 rounded-lg overflow-hidden">
-                  <img
-                    src={page.image}
-                    alt={page.altText || `Chapter ${index}`}
-                    className="w-full h-auto object-cover"
-                  />
+          {story.pages.map((page, index) => {
+            // Two-column layout with image
+            if (page.layout === "two-column-left" || page.layout === "two-column-right") {
+              return (
+                <div key={index} className="mb-12">
+                  {page.image && index > 0 && (
+                    <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
+                      Chapter {index}
+                    </h2>
+                  )}
+                  <div className={`grid md:grid-cols-2 gap-8 items-center ${
+                    page.layout === "two-column-right" ? "md:grid-flow-dense" : ""
+                  }`}>
+                    <div className={page.layout === "two-column-right" ? "md:col-start-2" : ""}>
+                      <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed">
+                        {page.text}
+                      </p>
+                    </div>
+                    {page.image && (
+                      <div className={`rounded-lg overflow-hidden shadow-lg ${
+                        page.layout === "two-column-right" ? "md:col-start-1 md:row-start-1" : ""
+                      }`}>
+                        <img
+                          src={page.image}
+                          alt={page.altText || `Chapter ${index}`}
+                          className="w-full h-auto object-cover"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
+              );
+            }
 
-              {/* Page Text */}
-              <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed mb-6">
-                {page.text}
-              </p>
-            </div>
-          ))}
+            // Default layout
+            return (
+              <div key={index} className="mb-12 max-w-3xl mx-auto">
+                {page.image && index > 0 && (
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
+                    Chapter {index}
+                  </h2>
+                )}
+
+                {page.image && index > 0 && (
+                  <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
+                    <img
+                      src={page.image}
+                      alt={page.altText || `Chapter ${index}`}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                )}
+
+                <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed mb-6">
+                  {page.text}
+                </p>
+              </div>
+            );
+          })}
         </div>
 
         {/* End of Story */}
-        <div className="text-center py-12 border-t mt-12">
+        <div className="text-center py-12 border-t mt-12 max-w-3xl mx-auto">
           <p className="text-xl font-fredoka text-muted-foreground mb-6">
             The End
           </p>
@@ -204,6 +239,14 @@ const StoryReader = () => {
           </Button>
         </div>
       </article>
+
+      {/* Story Rating */}
+      <StoryRating storyId={story.id} storyTitle={story.title} />
+
+      {/* Story Quiz */}
+      {story.quiz && story.quiz.length > 0 && (
+        <StoryQuiz questions={story.quiz} storyTitle={story.title} />
+      )}
     </div>
   );
 };
