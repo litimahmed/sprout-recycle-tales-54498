@@ -17,7 +17,7 @@ const Footer = () => {
               <span className="text-xl font-bold text-foreground">Eco Heroes</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Teaching kids to love and protect our planet, one story at a time. 🌍♻️
+              Teaching kids to love and protect our planet, one story at a time.
             </p>
           </div>
 
@@ -98,7 +98,7 @@ const Footer = () => {
             © 2024 Eco Heroes Story Library. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 fill-red-500 text-red-500" /> for our little Earth Heroes
+            Made with <Heart className="w-4 h-4 fill-red-500 text-red-500" /> for our little Eco Heroes
           </p>
         </div>
       </div>

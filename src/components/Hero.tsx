@@ -19,11 +19,11 @@ const Hero = () => {
           {/* Left Column - Content */}
           <div className="space-y-6 text-center md:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-              Let's Save the Planet Together! 🌍
+              Let's Save the Planet Together!
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground">
-              Join our amazing recycling adventures and learn how to become an Eco Hero! Every story teaches you something special about taking care of our Earth. ♻️✨
+              Join our amazing recycling adventures and learn how to become an Eco Hero! Every story teaches you something special about taking care of our Earth.
             </p>
             
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
@@ -39,13 +39,13 @@ const Hero = () => {
             
             <div className="flex flex-wrap gap-3 justify-center md:justify-start pt-4">
               <div className="px-4 py-2 rounded-full bg-eco-green/20 text-foreground font-medium text-sm">
-                🌱 Fun Stories
+                Fun Stories
               </div>
               <div className="px-4 py-2 rounded-full bg-eco-blue/20 text-foreground font-medium text-sm">
-                ♻️ Learn Recycling
+                Learn Recycling
               </div>
               <div className="px-4 py-2 rounded-full bg-eco-yellow/20 text-foreground font-medium text-sm">
-                🌍 Save Earth
+                Save Earth
               </div>
             </div>
           </div>
