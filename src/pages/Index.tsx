@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import InteractiveFeature from "@/components/InteractiveFeature";
 import AboutUs from "@/components/AboutUs";
 import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
@@ -79,12 +80,19 @@ const Index = () => {
     });
   };
 
+  const scrollToStories = () => {
+    const element = document.getElementById("stories-section");
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header books={books} onBookClick={handleBookClick} />
       <div id="hero-section">
         <Hero />
       </div>
+      
+      <InteractiveFeature onDiscoverClick={scrollToStories} />
       
       <AboutUs />
       
