@@ -10,6 +10,11 @@ import storySortingBinsCh2 from "@/assets/story-sorting-bins-ch2.jpg";
 import storySortingBinsCh3 from "@/assets/story-sorting-bins-ch3.jpg";
 import storySortingBinsCh4 from "@/assets/story-sorting-bins-ch4.jpg";
 import storySortingBinsCh5 from "@/assets/story-sorting-bins-ch5.jpg";
+import storyEarthHeroCover from "@/assets/story-earth-hero-cover.jpg";
+import storyEarthHeroCh1 from "@/assets/story-earth-hero-ch1.jpg";
+import storyEarthHeroCh2 from "@/assets/story-earth-hero-ch2.jpg";
+import storyEarthHeroCh3 from "@/assets/story-earth-hero-ch3.jpg";
+import storyEarthHeroCh4 from "@/assets/story-earth-hero-ch4.jpg";
 
 export interface StoryPage {
   text: string;
@@ -108,34 +113,80 @@ export const storyContent: Story[] = [
     id: 2,
     title: "Captain Earth Saves the Day",
     description: "When pollution threatens the planet, one young hero discovers amazing recycling powers! Join Captain Earth as he transforms trash into treasure and inspires children everywhere to become environmental superheroes.",
+    quiz: [
+      {
+        question: "What is Captain Earth's real name?",
+        options: ["Eddie", "Tommy", "Alex", "Sam"],
+        correctAnswer: 0
+      },
+      {
+        question: "What color is Captain Earth's cape?",
+        options: ["Red", "Blue", "Green", "Yellow"],
+        correctAnswer: 2
+      },
+      {
+        question: "What did Captain Earth teach children to remember?",
+        options: ["Stop, drop, and roll", "Reduce, reuse, and recycle", "Read, write, and count", "Jump, run, and play"],
+        correctAnswer: 1
+      },
+      {
+        question: "What animals did Captain Earth help in the ocean?",
+        options: ["Birds", "Dogs", "Marine animals", "Farm animals"],
+        correctAnswer: 2
+      },
+      {
+        question: "What did the children become at the end?",
+        options: ["Teachers", "Junior Earth Heroes", "Scientists", "Astronauts"],
+        correctAnswer: 1
+      }
+    ],
     pages: [
       {
-        image: bookEarthHero,
-        text: "In a world where trash was taking over, one hero stood up to protect the planet. His name was Captain Earth, and he had the power to turn pollution into clean energy!",
-        altText: "Superhero Captain Earth with a green cape flying over the city"
+        image: storyEarthHeroCover,
+        text: "High above the bustling city, where buildings touched the clouds and cars zipped through streets, lived a very special boy. His name was Eddie, and he had a secret that would change the world forever. By day, he was just an ordinary kid who loved playing outside. But when the planet needed help, he transformed into the mighty Captain Earth!",
+        altText: "Captain Earth superhero with green cape and Earth emblem flying over colorful city"
       },
       {
-        text: "Captain Earth's secret identity was Eddie, a regular kid who loved nature. One day, he discovered special recycling powers when he properly sorted his family's waste.",
+        text: "Eddie's extraordinary journey began on an ordinary Tuesday afternoon. He was cleaning up after lunch at home when something magical happened. As he carefully sorted the plastic bottles, paper napkins, and aluminum cans into the right recycling bins, a warm golden glow surrounded his hands. Suddenly, sparkles of green and blue light danced around the recyclables!",
+        image: storyEarthHeroCh1,
+        altText: "Young Eddie discovering magical glowing recycling powers in his bedroom",
+        layout: "two-column-left"
       },
       {
-        text: "With his blue cape flowing, Captain Earth flew over the city. He saw plastic bottles in the ocean, paper in the streets, and cans in the parks. 'It's time to recycle!' he declared.",
+        text: "'What's happening?' Eddie gasped, watching in amazement as the glow grew brighter. A gentle voice seemed to whisper from the Earth itself: 'You have been chosen, Eddie. You have shown you care about our planet. Now you have the power to protect it!' In that moment, Eddie understood his calling. He would become Captain Earth, defender of the environment!",
       },
       {
-        image: bookEarthHero,
-        text: "His first mission: rescue marine animals trapped in plastic. With his recycling ray, he transformed the plastic into useful items like park benches and playground equipment.",
-        altText: "Captain Earth using powers to clean up ocean plastic"
+        text: "With his flowing green cape (made from recycled materials, of course!) and the proud Earth emblem shining on his chest, Captain Earth soared through the sky. His mission was clear: to clean up pollution and teach everyone about the superpowers of recycling. His first stop? The beautiful blue ocean that was crying for help.",
+        image: storyEarthHeroCh2,
+        altText: "Captain Earth using recycling powers to clean ocean with happy marine animals",
+        layout: "two-column-right"
       },
       {
-        text: "Next, he visited schools to teach children his secret powers. 'Everyone can be a hero!' he said. 'Just remember to reduce, reuse, and recycle!'",
+        text: "At the beach, Captain Earth discovered plastic bottles, bags, and wrappers floating in the waves. Sea turtles, dolphins, and fish were struggling, trapped by the trash. 'Don't worry, friends!' Captain Earth called out. 'I'm here to help!' He raised his hands, and his amazing recycling ray shot beams of shimmering green light. Like magic, the plastic garbage began transforming!",
       },
       {
-        text: "The children learned to bring reusable water bottles, pack lunches in containers instead of bags, and always recycle their paper and cardboard.",
+        text: "The plastic bottles became sturdy park benches. The bags turned into colorful playground equipment. The wrappers transformed into beautiful planters for flowers. The ocean sparkled clean and clear again! The sea turtles did happy flips, and the dolphins jumped for joy. 'Thank you, Captain Earth!' they seemed to say with their cheerful sounds.",
       },
       {
-        text: "Captain Earth showed them how saving water by turning off taps and taking shorter showers was another superpower. 'Every drop counts!' he reminded them.",
+        text: "But Captain Earth knew that cleaning up wasn't enough – he needed to teach others how to be heroes too! The next morning, he flew to Sunnydale Elementary School (changing back to regular Eddie first, of course). During recess, he transformed into Captain Earth and landed in the playground. Children gathered around, their eyes wide with wonder and excitement!",
+        image: storyEarthHeroCh3,
+        altText: "Captain Earth teaching diverse excited children in bright classroom",
+        layout: "two-column-left"
       },
       {
-        text: "Soon, children everywhere became Junior Earth Heroes. They wore invisible capes made of responsibility and care for the planet. Together, they made the world cleaner and greener every day!",
+        text: "'Hello, Earth Heroes in training!' Captain Earth announced with a big smile. 'I have amazing news – every single one of you has superpowers too! You can help save our planet!' He taught them the three magic words: Reduce, Reuse, and Recycle. 'When you use less, reuse what you have, and recycle what you're done with, you're using your environmental superpowers!'",
+      },
+      {
+        text: "The children learned to bring reusable water bottles instead of disposable ones. They discovered how to pack lunches in containers instead of plastic bags. Captain Earth showed them which items go in which recycling bins – blue for paper, yellow for plastic, and green for compost. 'Remember,' he said, 'every can you recycle, every bottle you reuse, makes you a superhero for Earth!'",
+      },
+      {
+        text: "As the weeks went by, something wonderful happened. Children all around the world began using their environmental superpowers! They wore invisible capes made of responsibility, kindness, and care. They picked up litter in parks. They reminded their parents to recycle. They turned off lights to save energy. They became Junior Earth Heroes!",
+        image: storyEarthHeroCh4,
+        altText: "Diverse children as Junior Earth Heroes in beautiful clean park with nature",
+        layout: "two-column-right"
+      },
+      {
+        text: "Captain Earth watched from the sky as neighborhoods got cleaner, oceans got clearer, and more animals could live safely. He smiled, knowing that the real superpower wasn't his recycling ray – it was the power of many children working together to care for the planet. And whenever someone properly recycled something, somewhere in the world, Captain Earth's emblem glowed a little brighter, knowing another Earth Hero was making a difference!",
       }
     ]
   },
