@@ -74,10 +74,8 @@ const Index = () => {
     },
   ];
 
-  const handleBookClick = (bookTitle: string) => {
-    toast.success(`Opening "${bookTitle}"`, {
-      description: "Story coming soon! 📚",
-    });
+  const handleBookClick = (bookId: number) => {
+    window.location.href = `/story/${bookId}`;
   };
 
   const scrollToStories = () => {
@@ -121,7 +119,7 @@ const Index = () => {
                 readingTime={book.readingTime}
                 category={book.category}
                 description={book.description}
-                onClick={() => handleBookClick(book.title)}
+                onClick={() => handleBookClick(book.id)}
               />
             ))}
           </div>

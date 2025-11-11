@@ -121,3 +121,18 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Story page flip styles */
+.story-book {
+  margin: 0 auto;
+}
+
+.page {
+  @apply shadow-lg;
+  background: hsl(var(--card));
+}
+
+.page-content {
+  @apply text-card-foreground;
+}
+

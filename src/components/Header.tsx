@@ -14,7 +14,7 @@ interface Book {
 
 interface HeaderProps {
   books: Book[];
-  onBookClick: (bookTitle: string) => void;
+  onBookClick: (bookId: number) => void;
 }
 
 const Header = ({ books, onBookClick }: HeaderProps) => {

@@ -21,7 +21,7 @@ interface SearchDialogProps {
   books: Book[];
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onBookSelect: (bookTitle: string) => void;
+  onBookSelect: (bookId: number) => void;
 }
 
 const SearchDialog = ({ books, open, onOpenChange, onBookSelect }: SearchDialogProps) => {
@@ -34,8 +34,8 @@ const SearchDialog = ({ books, open, onOpenChange, onBookSelect }: SearchDialogP
       book.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const handleBookClick = (bookTitle: string) => {
-    onBookSelect(bookTitle);
+  const handleBookClick = (bookId: number) => {
+    onBookSelect(bookId);
     onOpenChange(false);
     setSearchQuery("");
   };
@@ -70,7 +70,7 @@ const SearchDialog = ({ books, open, onOpenChange, onBookSelect }: SearchDialogP
             filteredBooks.map((book) => (
               <button
                 key={book.id}
-                onClick={() => handleBookClick(book.title)}
+                onClick={() => handleBookClick(book.id)}
                 className="w-full flex items-start gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors text-left"
               >
                 <img
