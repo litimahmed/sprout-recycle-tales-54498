@@ -17,7 +17,7 @@ const BookCard = ({ title, image, color, readingTime, category, description, onC
   const [isFavorited, setIsFavorited] = useState(false);
 
   return (
-    <Card className="group overflow-hidden border border-border hover:shadow-xl transition-all duration-300">
+    <Card className="group overflow-hidden border border-border hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1">
       {/* Book Cover */}
       <div className="relative aspect-[16/10] overflow-hidden">
         <img 

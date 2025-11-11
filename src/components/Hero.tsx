@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { BookOpen } from "lucide-react";
 import heroImage from "@/assets/hero-eco-kids.jpg";
+import DecorativeBlobs from "@/components/DecorativeBlobs";
 
 const Hero = () => {
   const scrollToStories = () => {
@@ -11,6 +12,7 @@ const Hero = () => {
   return (
     <section className="relative py-12 md:py-16 lg:py-20 px-4 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-eco-green/10 via-eco-blue/10 to-eco-yellow/10 -z-10" />
+      <DecorativeBlobs />
       
       <div className="container mx-auto max-w-6xl">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">

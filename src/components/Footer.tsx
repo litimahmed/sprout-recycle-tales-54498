@@ -2,8 +2,11 @@ import { BookOpen, Heart, Mail, ExternalLink } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-muted/30 mt-20">
-      <div className="container mx-auto max-w-7xl px-4 py-12">
+    <footer className="relative border-t border-border bg-muted/30 mt-20 overflow-hidden">
+      {/* Footer blobs */}
+      <div className="absolute bottom-0 left-10 w-96 h-96 bg-eco-green/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-20 w-72 h-72 bg-eco-blue/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="container mx-auto max-w-7xl px-4 py-12 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">

@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
+import DecorativeBlobs from "@/components/DecorativeBlobs";
 import { toast } from "sonner";
 
 // Import book cover images
@@ -84,8 +85,12 @@ const Index = () => {
         <Hero />
       </div>
       
-      <section id="stories-section" className="py-12 px-4">
-        <div className="container mx-auto max-w-7xl">
+      <section id="stories-section" className="relative py-12 px-4 overflow-hidden">
+        {/* Subtle blobs for the story section */}
+        <div className="absolute top-10 left-1/4 w-72 h-72 bg-eco-orange/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-20 right-1/4 w-64 h-64 bg-eco-purple/15 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="container mx-auto max-w-7xl relative z-10">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
               Choose Your Story
