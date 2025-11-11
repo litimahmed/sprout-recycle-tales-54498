@@ -4,6 +4,12 @@ import bookKidsRecycling from "@/assets/book-kids-recycling.jpg";
 import bookBottleJourney from "@/assets/book-bottle-journey.jpg";
 import bookCompostMagic from "@/assets/book-compost-magic.jpg";
 import bookPaperFriends from "@/assets/book-paper-friends.jpg";
+import storySortingBinsCover from "@/assets/story-sorting-bins-cover.jpg";
+import storySortingBinsCh1 from "@/assets/story-sorting-bins-ch1.jpg";
+import storySortingBinsCh2 from "@/assets/story-sorting-bins-ch2.jpg";
+import storySortingBinsCh3 from "@/assets/story-sorting-bins-ch3.jpg";
+import storySortingBinsCh4 from "@/assets/story-sorting-bins-ch4.jpg";
+import storySortingBinsCh5 from "@/assets/story-sorting-bins-ch5.jpg";
 
 export interface StoryPage {
   text: string;
@@ -30,68 +36,71 @@ export const storyContent: Story[] = [
   {
     id: 1,
     title: "The Sorting Bins Adventure",
-    description: "In a vibrant community, three colorful bins share the importance of sorting, helping others, and the magic of turning waste into treasure. Together, they create a Treasure Map of Help that reveals the true value of teamwork and caring for our planet.",
+    description: "Join Lily on a magical journey as three friendly recycling bins come to life and teach her the secrets of sorting waste! A heartwarming tale about teamwork, responsibility, and keeping our planet clean through the power of recycling.",
     quiz: [
       {
-        question: "What are the names of the three bins?",
-        options: ["Benny, Gary, and Olivia", "Billy, George, and Oscar", "Bobby, Greg, and Ollie", "Ben, Gerry, and Owen"],
+        question: "What is the main character's name?",
+        options: ["Lily", "Emma", "Maya", "Sarah"],
         correctAnswer: 0
       },
       {
         question: "What color is the bin for paper?",
-        options: ["Green", "Orange", "Blue", "Yellow"],
+        options: ["Green", "Yellow", "Blue", "Red"],
         correctAnswer: 2
       },
       {
-        question: "What does Gary the Green Bin collect?",
-        options: ["Plastic bottles", "Food scraps and yard waste", "Paper", "Metal cans"],
+        question: "What does the green bin collect?",
+        options: ["Plastic bottles", "Organic waste like food scraps", "Paper and cardboard", "Metal cans"],
         correctAnswer: 1
       },
       {
-        question: "What did the bins do to teach the children?",
-        options: ["Made a video", "Wrote a book", "Sang a song", "Drew pictures"],
-        correctAnswer: 2
+        question: "How many recycling bins came to life?",
+        options: ["Two", "Three", "Four", "Five"],
+        correctAnswer: 1
       },
       {
-        question: "What happened by the end of the story?",
-        options: ["The park closed", "Children became recycling champions", "The bins moved away", "Nothing changed"],
+        question: "What happened at the end of the story?",
+        options: ["The playground closed", "All the children learned to recycle", "The bins disappeared", "It started raining"],
         correctAnswer: 1
       }
     ],
     pages: [
       {
-        image: bookSortingBins,
-        text: "Meet Benny the Blue Bin, Gary the Green Bin, and Olivia the Orange Bin. They live in a friendly neighborhood park and help keep it clean!",
-        altText: "Three colorful recycling bins with friendly faces"
+        image: storySortingBinsCover,
+        text: "In a sunny playground filled with laughter and joy, three special friends lived together. They weren't ordinary playground equipment – they were magical recycling bins! Meet Benny the Blue Bin, who loved paper, Greta the Green Bin, who adored organic waste, and Yara the Yellow Bin, who collected plastic treasures.",
+        altText: "Three friendly colorful recycling bins with smiling faces in a sunny playground"
       },
       {
-        text: "One sunny morning, Benny noticed children playing near the park. Some threw paper on the ground instead of in bins. 'Oh no!' said Benny. 'We need to teach them about sorting!'",
-      },
-      {
-        text: "Gary jumped up excitedly. 'I can help! I love food scraps and yard waste. They turn into rich soil that helps flowers grow!' His green body shimmered in the sunlight.",
-        image: bookSortingBins,
-        altText: "Gary the Green Bin in the park",
-        layout: "two-column-right"
-      },
-      {
-        image: bookSortingBins,
-        text: "Olivia the Orange Bin chimed in, 'And I collect all the other recyclables! Plastic bottles, metal cans, and glass jars belong with me. Together, we can save them from the landfill!'",
-        altText: "Orange recycling bin sorting plastic and metal items"
-      },
-      {
-        text: "The three friends decided to put on a show for the children. They sang a catchy song: 'Blue for paper, Green for food, Orange for plastic - we're doing good!'",
-        image: bookSortingBins,
-        altText: "Three bins singing together",
+        text: "One bright morning, a young girl named Lily walked into the playground after her snack time. She looked at the pile of trash in her hands – a juice box, a banana peel, and a crumpled paper napkin – and froze. 'I have no idea where these go,' she whispered, looking confused at the three colorful bins standing in a row.",
+        image: storySortingBinsCh1,
+        altText: "Young girl Lily standing confused with mixed trash in her hands",
         layout: "two-column-left"
       },
       {
-        text: "The children loved learning about recycling! They started sorting their waste properly. Each piece of trash found its perfect home in the right bin.",
+        text: "Suddenly, something magical happened! The three bins began to glow and shimmer. One by one, they came to life! Benny the Blue Bin was the first to speak. 'Hello, Lily!' he said with a cheerful voice. 'Don't worry! We're here to help you learn the wonderful world of sorting waste. Each of us has a special job!'",
+        image: storySortingBinsCh2,
+        altText: "Three magical animated recycling bins with friendly faces introducing themselves",
+        layout: "two-column-right"
       },
       {
-        text: "By the end of the day, the park was cleaner than ever. Benny, Gary, and Olivia smiled proudly. 'When we all work together and sort our waste, we help keep our planet beautiful!'",
+        text: "Greta the Green Bin wiggled excitedly. 'I collect all the yummy organic waste – banana peels, apple cores, vegetable scraps, and grass clippings! We turn them into nutritious compost that helps plants grow big and strong.' Yara the Yellow Bin chimed in, 'And I take care of plastic bottles, containers, and packaging! We can recycle them into new products.' Benny added proudly, 'Paper, cardboard, and newspapers belong with me! Together, we keep waste out of landfills and help save our beautiful planet.'",
       },
       {
-        text: "From that day on, the children always remembered to recycle. They became the park's recycling champions, teaching other kids how to sort waste properly too!",
+        text: "Lily's eyes sparkled with understanding. 'Oh, I get it now!' she exclaimed. She carefully placed the paper napkin in Benny's blue opening, the banana peel in Greta's green mouth, and the juice box's plastic wrapping in Yara's yellow slot. The bins cheered with joy! 'You did it perfectly, Lily! You're a natural recycling champion!'",
+        image: storySortingBinsCh3,
+        altText: "Lily happily sorting different items into the correct recycling bins",
+        layout: "two-column-left"
+      },
+      {
+        text: "Word spread quickly around the playground about the magical talking bins! Soon, children from all over came running to meet Benny, Greta, and Yara. The bins patiently taught each child which items belonged where. They made up fun rhymes: 'Paper in blue, organics in green, plastic in yellow – keep the planet clean!' The playground buzzed with excitement as everyone practiced sorting.",
+        image: storySortingBinsCh4,
+        altText: "Group of diverse children learning to use recycling bins correctly",
+        layout: "two-column-right"
+      },
+      {
+        text: "From that magical day forward, the playground became the cleanest, happiest place in town. Children always remembered to sort their waste correctly, and they even taught their families at home. The three bins stood proudly, knowing they had made a real difference. And sometimes, when no adults were watching, you could still hear them whispering words of encouragement to the children: 'Great job! You're helping save the Earth!'",
+        image: storySortingBinsCh5,
+        altText: "Beautiful clean playground with happy children and Earth smiling in the sky",
       }
     ]
   },
