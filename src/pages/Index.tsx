@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
 import { toast } from "sonner";
 
@@ -77,7 +79,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Hero />
+      <Header />
+      <div id="hero-section">
+        <Hero />
+      </div>
       
       <section id="stories-section" className="py-12 px-4">
         <div className="container mx-auto max-w-7xl">
@@ -107,11 +112,7 @@ const Index = () => {
         </div>
       </section>
       
-      <footer className="py-8 px-4 text-center border-t border-border mt-12">
-        <p className="text-muted-foreground text-sm">
-          🌟 Made with love for our little Eco Heroes 🌟
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 };
