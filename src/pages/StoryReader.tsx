@@ -185,15 +185,15 @@ const StoryReader = () => {
       </div>
 
       {/* FlipBook - Full page */}
-      <div className="flex-1 flex items-center justify-center overflow-hidden bg-gradient-to-br from-eco-blue/5 via-background to-eco-green/5">
+      <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-eco-blue/5 via-background to-eco-green/5">
         <HTMLFlipBook
-          width={650}
-          height={850}
-          size="stretch"
-          minWidth={300}
-          maxWidth={1400}
-          minHeight={400}
-          maxHeight={1000}
+          width={550}
+          height={750}
+          size="fixed"
+          minWidth={550}
+          maxWidth={550}
+          minHeight={750}
+          maxHeight={750}
           showCover={true}
           mobileScrollSupport={true}
           onFlip={(e) => setCurrentPage(e.data)}
