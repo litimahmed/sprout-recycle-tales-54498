@@ -1,61 +1,14 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import HTMLFlipBook from "react-pageflip";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Volume2, Share2, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Volume2, Share2, Clock, Tag } from "lucide-react";
 import { toast } from "sonner";
 import { storyContent } from "@/data/storyContent";
-
-// Page component for flipbook
-const StoryPage = React.forwardRef<HTMLDivElement, { page: { image?: string; text: string }; pageNumber: number }>((props, ref) => {
-  return (
-    <div className="w-full h-full bg-card" ref={ref}>
-      <div className="w-full h-full flex">
-        {/* Image on left (if available) */}
-        {props.page.image ? (
-          <>
-            <div className="w-1/2 h-full">
-              <img
-                src={props.page.image}
-                alt={`Page ${props.pageNumber}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Text on right */}
-            <div className="w-1/2 h-full p-6 md:p-12 flex flex-col items-center justify-center bg-card">
-              <p className="text-base md:text-2xl text-foreground font-fredoka leading-relaxed text-center">
-                {props.page.text}
-              </p>
-              <p className="text-sm text-muted-foreground mt-6 font-fredoka">
-                Page {props.pageNumber}
-              </p>
-            </div>
-          </>
-        ) : (
-          /* Full width text when no image */
-          <div className="w-full h-full p-8 md:p-16 flex flex-col items-center justify-center bg-card">
-            <p className="text-lg md:text-2xl text-foreground font-fredoka leading-relaxed text-center max-w-2xl">
-              {props.page.text}
-            </p>
-            <p className="text-sm text-muted-foreground mt-8 font-fredoka">
-              Page {props.pageNumber}
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-});
-
-StoryPage.displayName = "StoryPage";
 
 const StoryReader = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const flipBookRef = useRef<any>(null);
-  const [currentPage, setCurrentPage] = useState(0);
   const [isNarratorActive, setIsNarratorActive] = useState(false);
-  const [isToolbarExpanded, setIsToolbarExpanded] = useState(true);
 
   const story = storyContent.find((s) => s.id === Number(id));
 
@@ -97,14 +50,14 @@ const StoryReader = () => {
     }
   };
 
+  // Get the thumbnail image (first page with image)
+  const thumbnailImage = story.pages.find(page => page.image)?.image || "";
+  const estimatedReadTime = Math.ceil(story.pages.length * 1.5); // ~1.5 min per page
+
   return (
-    <div className="h-screen w-screen flex flex-col bg-gradient-to-br from-background via-background to-muted overflow-hidden">
-      {/* Collapsible Toolbar */}
-      <div 
-        className={`w-full bg-background/95 backdrop-blur border-b border-border transition-all duration-300 z-10 ${
-          isToolbarExpanded ? "h-auto" : "h-14"
-        }`}
-      >
+    <div className="min-h-screen bg-background">
+      {/* Fixed Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <Button
@@ -117,25 +70,7 @@ const StoryReader = () => {
               Back
             </Button>
 
-            <h1 className="text-xl md:text-2xl font-bold text-foreground font-fredoka">
-              {story.title}
-            </h1>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsToolbarExpanded(!isToolbarExpanded)}
-            >
-              {isToolbarExpanded ? (
-                <ChevronUp className="h-5 w-5" />
-              ) : (
-                <ChevronDown className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
-
-          {isToolbarExpanded && (
-            <div className="flex items-center justify-center gap-3 mt-4 pb-2 flex-wrap">
+            <div className="flex items-center gap-2">
               <Button
                 variant={isNarratorActive ? "default" : "outline"}
                 size="sm"
@@ -143,7 +78,7 @@ const StoryReader = () => {
                 className="gap-2"
               >
                 <Volume2 className="h-4 w-4" />
-                Narrator
+                <span className="hidden sm:inline">Narrator</span>
               </Button>
 
               <Button
@@ -153,71 +88,90 @@ const StoryReader = () => {
                 className="gap-2"
               >
                 <Share2 className="h-4 w-4" />
-                Share
+                <span className="hidden sm:inline">Share</span>
               </Button>
+            </div>
+          </div>
+        </div>
+      </header>
 
-              <div className="flex items-center gap-2 ml-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => flipBookRef.current?.pageFlip().flipPrev()}
-                  disabled={currentPage === 0}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                
-                <span className="text-sm text-muted-foreground min-w-[80px] text-center">
-                  Page {currentPage + 1} / {story.pages.length}
-                </span>
-
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => flipBookRef.current?.pageFlip().flipNext()}
-                  disabled={currentPage === story.pages.length - 1}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
+      {/* Hero Banner Section */}
+      <section className="relative w-full bg-gradient-to-br from-eco-blue/10 via-background to-eco-green/10">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <div className="max-w-4xl mx-auto">
+            {/* Story Title & Meta */}
+            <div className="text-center mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold text-foreground font-fredoka mb-4">
+                {story.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1">
+                  <Clock className="h-4 w-4" />
+                  <span>{estimatedReadTime} min read</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Tag className="h-4 w-4" />
+                  <span>Age 4-8</span>
+                </div>
               </div>
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* FlipBook - Full page */}
-      <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-eco-blue/5 via-background to-eco-green/5 p-4">
-        <HTMLFlipBook
-          width={450}
-          height={600}
-          size="stretch"
-          minWidth={300}
-          maxWidth={1000}
-          minHeight={400}
-          maxHeight={800}
-          showCover={true}
-          mobileScrollSupport={true}
-          onFlip={(e) => setCurrentPage(e.data)}
-          className="shadow-2xl"
-          ref={flipBookRef}
-          startPage={0}
-          drawShadow={true}
-          flippingTime={800}
-          usePortrait={false}
-          startZIndex={0}
-          autoSize={true}
-          maxShadowOpacity={0.5}
-          showPageCorners={true}
-          disableFlipByClick={false}
-          clickEventForward={true}
-          useMouseEvents={true}
-          swipeDistance={30}
-          style={{}}
-        >
+            {/* Thumbnail Image */}
+            {thumbnailImage && (
+              <div className="relative w-full max-w-2xl mx-auto rounded-lg overflow-hidden shadow-2xl">
+                <img
+                  src={thumbnailImage}
+                  alt={story.title}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Story Content */}
+      <article className="container mx-auto px-4 py-12 max-w-3xl">
+        <div className="prose prose-lg max-w-none">
           {story.pages.map((page, index) => (
-            <StoryPage key={index} page={page} pageNumber={index + 1} />
+            <div key={index} className="mb-12">
+              {/* Chapter heading for pages with images */}
+              {page.image && index > 0 && (
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
+                  Chapter {index}
+                </h2>
+              )}
+
+              {/* Page Image */}
+              {page.image && index > 0 && (
+                <div className="mb-6 rounded-lg overflow-hidden">
+                  <img
+                    src={page.image}
+                    alt={page.altText || `Chapter ${index}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Page Text */}
+              <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed mb-6">
+                {page.text}
+              </p>
+            </div>
           ))}
-        </HTMLFlipBook>
-      </div>
+        </div>
+
+        {/* End of Story */}
+        <div className="text-center py-12 border-t mt-12">
+          <p className="text-xl font-fredoka text-muted-foreground mb-6">
+            The End
+          </p>
+          <Button onClick={() => navigate("/")} size="lg">
+            Read More Stories
+          </Button>
+        </div>
+      </article>
     </div>
   );
 };
