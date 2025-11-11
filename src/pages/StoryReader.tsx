@@ -113,12 +113,12 @@ const StoryReader = () => {
         <div className="relative container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-4xl mx-auto text-center">
             {/* Story Title */}
-            <h1 className="text-4xl md:text-6xl font-bold text-white font-fredoka mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white font-story mb-6">
               {story.title}
             </h1>
             
             {/* Story Description */}
-            <p className="text-lg md:text-xl text-white/90 font-fredoka leading-relaxed mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 font-story leading-relaxed mb-8 max-w-3xl mx-auto">
               {story.description}
             </p>
 
@@ -166,76 +166,109 @@ const StoryReader = () => {
       )}
 
       {/* Story Content */}
-      <article className="container mx-auto px-4 py-12 max-w-5xl">
-        <div className="prose prose-lg max-w-none">
+      <article className="container mx-auto px-4 py-16 max-w-6xl">
+        <div className="font-story space-y-20">
           {story.pages.map((page, index) => {
-            // Two-column layout with image
-            if (page.layout === "two-column-left" || page.layout === "two-column-right") {
+            const layout = page.layout || "default";
+            
+            // Two-column layout with image on LEFT
+            if (layout === "two-column-left" && page.image) {
               return (
-                <div key={index} className="mb-12">
-                  {page.image && index > 0 && (
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
-                      Chapter {index}
-                    </h2>
-                  )}
-                  <div className={`grid md:grid-cols-2 gap-8 items-center ${
-                    page.layout === "two-column-right" ? "md:grid-flow-dense" : ""
-                  }`}>
-                    <div className={page.layout === "two-column-right" ? "md:col-start-2" : ""}>
-                      <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed">
-                        {page.text}
-                      </p>
-                    </div>
-                    {page.image && (
-                      <div className={`rounded-lg overflow-hidden shadow-lg ${
-                        page.layout === "two-column-right" ? "md:col-start-1 md:row-start-1" : ""
-                      }`}>
-                        <img
-                          src={page.image}
-                          alt={page.altText || `Chapter ${index}`}
-                          className="w-full h-auto object-cover"
-                        />
-                      </div>
-                    )}
+                <section key={index} className="grid lg:grid-cols-[2fr,3fr] gap-12 items-center">
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
+                    <img 
+                      src={page.image} 
+                      alt={page.altText || `Chapter ${index + 1}`}
+                      className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                   </div>
-                </div>
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center gap-2 bg-eco-green/10 px-5 py-2.5 rounded-full">
+                      <div className="w-2 h-2 rounded-full bg-eco-green animate-pulse" />
+                      <span className="text-eco-green font-bold text-sm uppercase tracking-wider">
+                        Chapter {index + 1}
+                      </span>
+                    </div>
+                    <p className="text-2xl md:text-3xl leading-relaxed text-foreground font-medium first-letter:text-6xl first-letter:font-bold first-letter:text-eco-green first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-1">
+                      {page.text}
+                    </p>
+                  </div>
+                </section>
               );
             }
-
-            // Default layout
-            return (
-              <div key={index} className="mb-12 max-w-3xl mx-auto">
-                {page.image && index > 0 && (
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground font-fredoka mb-6">
-                    Chapter {index}
-                  </h2>
-                )}
-
-                {page.image && index > 0 && (
-                  <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
-                    <img
-                      src={page.image}
-                      alt={page.altText || `Chapter ${index}`}
-                      className="w-full h-auto object-cover"
+            
+            // Two-column layout with image on RIGHT
+            if (layout === "two-column-right" && page.image) {
+              return (
+                <section key={index} className="grid lg:grid-cols-[3fr,2fr] gap-12 items-center">
+                  <div className="space-y-6 order-2 lg:order-1">
+                    <div className="inline-flex items-center gap-2 bg-eco-blue/10 px-5 py-2.5 rounded-full">
+                      <div className="w-2 h-2 rounded-full bg-eco-blue animate-pulse" />
+                      <span className="text-eco-blue font-bold text-sm uppercase tracking-wider">
+                        Chapter {index + 1}
+                      </span>
+                    </div>
+                    <p className="text-2xl md:text-3xl leading-relaxed text-foreground font-medium first-letter:text-6xl first-letter:font-bold first-letter:text-eco-blue first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-1">
+                      {page.text}
+                    </p>
+                  </div>
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group order-1 lg:order-2">
+                    <img 
+                      src={page.image} 
+                      alt={page.altText || `Chapter ${index + 1}`}
+                      className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-110"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  </div>
+                </section>
+              );
+            }
+            
+            // Default layout - full width centered with optional image
+            return (
+              <section key={index} className="space-y-10 max-w-4xl mx-auto">
+                {page.image && (
+                  <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
+                    <img 
+                      src={page.image} 
+                      alt={page.altText || `Chapter ${index + 1}`}
+                      className="w-full aspect-[16/9] object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                    <div className="absolute bottom-8 left-8">
+                      <div className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-xl">
+                        <div className="w-2 h-2 rounded-full bg-eco-purple animate-pulse" />
+                        <span className="text-foreground font-bold text-sm uppercase tracking-wider">
+                          Chapter {index + 1}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 )}
-
-                <p className="text-lg md:text-xl text-foreground/90 font-fredoka leading-relaxed mb-6">
+                <p className="text-2xl md:text-3xl leading-relaxed text-foreground font-medium first-letter:text-7xl first-letter:font-bold first-letter:text-eco-purple first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-2">
                   {page.text}
                 </p>
-              </div>
+              </section>
             );
           })}
         </div>
 
         {/* End of Story */}
-        <div className="text-center py-12 border-t mt-12 max-w-3xl mx-auto">
-          <p className="text-xl font-fredoka text-muted-foreground mb-6">
-            The End
+        <div className="text-center py-20 mt-20">
+          <div className="inline-block mb-8">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-eco-green via-eco-blue to-eco-purple blur-xl opacity-30" />
+              <p className="relative text-4xl md:text-5xl font-bold bg-gradient-to-r from-eco-green via-eco-blue to-eco-purple bg-clip-text text-transparent">
+                The End
+              </p>
+            </div>
+          </div>
+          <p className="text-xl text-muted-foreground mb-8 max-w-md mx-auto">
+            You've completed this amazing eco-adventure! Ready for another story?
           </p>
-          <Button onClick={() => navigate("/")} size="lg">
-            Read More Stories
+          <Button onClick={() => navigate("/")} size="lg" className="text-lg px-8 py-6">
+            Discover More Stories
           </Button>
         </div>
       </article>
