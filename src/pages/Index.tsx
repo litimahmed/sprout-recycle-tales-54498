@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import AboutUs from "@/components/AboutUs";
 import Footer from "@/components/Footer";
 import BookCard from "@/components/BookCard";
 import DecorativeBlobs from "@/components/DecorativeBlobs";
@@ -84,6 +85,8 @@ const Index = () => {
       <div id="hero-section">
         <Hero />
       </div>
+      
+      <AboutUs />
       
       <section id="stories-section" className="relative py-12 px-4 overflow-hidden">
         {/* Subtle blobs for the story section */}
