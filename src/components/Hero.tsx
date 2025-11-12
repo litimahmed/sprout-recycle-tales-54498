@@ -29,7 +29,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <Button 
                 size="lg" 
-                className="bg-eco-green hover:bg-eco-green/90 text-white font-bold text-lg px-8 py-6 rounded-full shadow-lg"
+                className="bg-eco-green hover:bg-eco-green/90 text-white font-semibold text-lg px-10 py-6 rounded-xl shadow-sm hover:shadow-md transition-all"
                 onClick={scrollToStories}
               >
                 <BookOpen className="mr-2 h-5 w-5" />
@@ -38,14 +38,14 @@ const Hero = () => {
             </div>
             
             <div className="flex flex-wrap gap-3 justify-center md:justify-start pt-4">
-              <div className="px-4 py-2 rounded-full bg-eco-green/20 text-foreground font-medium text-sm">
-                Fun Stories
+              <div className="group px-5 py-2.5 rounded-lg bg-background border-2 border-eco-green/30 text-foreground font-medium text-sm hover:border-eco-green/60 transition-all cursor-default">
+                <span className="text-eco-green">✦</span> Fun Stories
               </div>
-              <div className="px-4 py-2 rounded-full bg-eco-blue/20 text-foreground font-medium text-sm">
-                Learn Recycling
+              <div className="group px-5 py-2.5 rounded-lg bg-background border-2 border-eco-blue/30 text-foreground font-medium text-sm hover:border-eco-blue/60 transition-all cursor-default">
+                <span className="text-eco-blue">✦</span> Learn Recycling
               </div>
-              <div className="px-4 py-2 rounded-full bg-eco-yellow/20 text-foreground font-medium text-sm">
-                Save Earth
+              <div className="group px-5 py-2.5 rounded-lg bg-background border-2 border-eco-yellow/30 text-foreground font-medium text-sm hover:border-eco-yellow/60 transition-all cursor-default">
+                <span className="text-eco-yellow">✦</span> Save Earth
               </div>
             </div>
           </div>
