@@ -1,6 +1,6 @@
 import bookSortingBins from "@/assets/book-sorting-bins.jpg";
 import bookEarthHero from "@/assets/book-earth-hero.jpg";
-import bookKidsRecycling from "@/assets/book-kids-recycling.jpg";
+import bookJungleRecycling from "@/assets/book-jungle-recycling.jpg";
 import bookBottleJourney from "@/assets/book-bottle-journey.jpg";
 import bookCompostMagic from "@/assets/book-compost-magic.jpg";
 import bookPaperFriends from "@/assets/book-paper-friends.jpg";
@@ -15,6 +15,12 @@ import storyEarthHeroCh1 from "@/assets/story-earth-hero-ch1.jpg";
 import storyEarthHeroCh2 from "@/assets/story-earth-hero-ch2.jpg";
 import storyEarthHeroCh3 from "@/assets/story-earth-hero-ch3.jpg";
 import storyEarthHeroCh4 from "@/assets/story-earth-hero-ch4.jpg";
+import storyJungleCover from "@/assets/story-jungle-cover.jpg";
+import storyJungleCh1 from "@/assets/story-jungle-ch1.jpg";
+import storyJungleCh2 from "@/assets/story-jungle-ch2.jpg";
+import storyJungleCh3 from "@/assets/story-jungle-ch3.jpg";
+import storyJungleCh4 from "@/assets/story-jungle-ch4.jpg";
+import storyJungleCh5 from "@/assets/story-jungle-ch5.jpg";
 
 export interface StoryPage {
   text: string;
@@ -192,39 +198,81 @@ export const storyContent: Story[] = [
   },
   {
     id: 3,
-    title: "Kids Who Care",
-    description: "Four best friends discover their beloved park covered in litter and decide to take action! Watch as Maya, Josh, Aisha, and Leo organize a community cleanup that transforms their neighborhood and inspires everyone around them.",
+    title: "Moki's Jungle Recycling Adventure",
+    description: "Deep in the Greenleaf Jungle, Moki the monkey discovers his forest friends are in trouble. Join him and his friends Lila, Tami, and Rex on an exciting journey to restore their home and learn how to recycle right!",
+    quiz: [
+      {
+        question: "Who is the main character of the story?",
+        options: ["Lila", "Moki", "Rex", "Tami"],
+        correctAnswer: 1
+      },
+      {
+        question: "What did Moki find in the river?",
+        options: ["Fish", "Plastic bottles", "Flowers", "Rocks"],
+        correctAnswer: 1
+      },
+      {
+        question: "Which friend is a parrot?",
+        options: ["Tami", "Rex", "Lila", "Moki"],
+        correctAnswer: 2
+      },
+      {
+        question: "What type of animal is Rex?",
+        options: ["Monkey", "Turtle", "Elephant", "Parrot"],
+        correctAnswer: 2
+      },
+      {
+        question: "What did the friends learn to do?",
+        options: ["Swim", "Fly", "Recycle properly", "Climb trees"],
+        correctAnswer: 2
+      }
+    ],
     pages: [
       {
-        image: bookKidsRecycling,
-        text: "In Sunnyville, four best friends - Maya, Josh, Aisha, and Leo - loved playing in Greenleaf Park. But one day, they found trash everywhere!",
-        altText: "Four diverse children looking concerned at litter in the park"
+        image: storyJungleCover,
+        text: "Deep in the Greenleaf Jungle, where tall trees touched the sky and colorful birds sang beautiful songs, lived Moki the monkey. Moki loved swinging through the trees and playing with his friends - Lila the parrot, Tami the turtle, and Rex the elephant. Their jungle home was the most beautiful place in the world!",
+        altText: "Moki the monkey and his jungle friends in beautiful Greenleaf Jungle with river"
       },
       {
-        text: "'This is terrible!' said Maya, picking up a plastic bottle. 'Our beautiful park is covered in litter. We have to do something!'",
+        text: "One sunny morning, Moki was swinging to his favorite spot by the river when he noticed something strange. 'What's that floating in the water?' he wondered. As he got closer, his heart sank. Plastic bottles were bobbing in the river! The water that was once crystal clear now had trash floating everywhere.",
+        image: storyJungleCh1,
+        altText: "Moki discovering plastic bottles in the jungle river looking concerned",
+        layout: "two-column-left"
       },
       {
-        text: "Josh had an idea. 'Let's organize a cleanup day! We can invite other kids from school and teach them about recycling while we clean.'",
+        text: "'Oh no!' Moki cried out. 'This is terrible! The fish can't swim properly, and the water doesn't look clean anymore.' He quickly called for his friend Lila the parrot. 'Lila! Lila! Come quick! We have a big problem!' Lila flew down from the treetops, her colorful feathers shimmering in the sunlight.",
       },
       {
-        image: bookKidsRecycling,
-        text: "The friends made colorful posters and hung them all around school. 'Join the Greenleaf Park Cleanup! Saturday at 9 AM. Bring gloves and your caring heart!'",
-        altText: "Children making bright posters for park cleanup event"
+        text: "'What's wrong, Moki?' asked Lila. Moki pointed to the river. Lila gasped, 'That's not all! Look over there!' She flew Moki to another part of the jungle. Paper waste was scattered everywhere around the trees! Old newspapers, cardboard boxes, and torn paper were covering the beautiful jungle floor.",
+        image: storyJungleCh2,
+        altText: "Lila the colorful parrot and Moki looking at paper waste in jungle",
+        layout: "two-column-right"
       },
       {
-        text: "Saturday arrived, and over 50 kids showed up! They brought bags, gloves, and big smiles. Aisha organized everyone into teams with different colored bags for different materials.",
+        text: "'This is getting worse!' said Moki. Just then, Tami the turtle slowly walked up to them. 'Friends, I need to show you something too,' she said worriedly. Tami led them to her favorite resting spot, where there was leftover food everywhere! Banana peels, fruit scraps, and food waste were attracting swarms of buzzing flies and crawling bugs.",
+        image: storyJungleCh3,
+        altText: "Tami the turtle with Moki near leftover food attracting insects",
+        layout: "two-column-left"
       },
       {
-        text: "Leo's team collected paper and cardboard. Maya's team gathered plastic bottles and containers. Josh's team picked up metal cans. Aisha's team found glass bottles.",
+        text: "'Our beautiful jungle is in trouble!' exclaimed Moki. 'We need help!' Just then, they heard a loud trumpet sound. It was Rex the elephant! 'I heard you calling,' said Rex with his deep, kind voice. 'Don't worry, friends. I know exactly what we need to do. We need to learn about recycling!'",
       },
       {
-        text: "After two hours of hard work, the park looked beautiful again! They had collected 20 bags of recyclables. 'Look at what we accomplished together!' Maya cheered.",
+        text: "Rex explained to his friends about the three special bins - blue for paper, yellow for plastic, and green for food waste. 'When we sort our waste properly, we can help the Earth!' Rex said proudly. 'Paper can be recycled into new paper, plastic bottles can become new things, and food waste can turn into compost to help plants grow!'",
+        image: storyJungleCh4,
+        altText: "Rex the elephant and jungle friends with colorful recycling bins working together",
+        layout: "two-column-right"
       },
       {
-        text: "The mayor heard about their efforts and gave them the 'Young Environmental Heroes' award. But the best reward was seeing their clean, happy park where birds sang and butterflies danced again.",
+        text: "The four friends worked together as a team! Moki swung through the trees collecting plastic bottles from the river. Lila flew around gathering all the paper waste. Tami carefully collected the food scraps. Rex used his strong trunk to place everything into the correct recycling bins - blue, yellow, and green!",
       },
       {
-        text: "The four friends started the 'Kids Who Care Club.' Every month, they organized cleanup events and taught other children about protecting the environment. Their small action inspired an entire community!",
+        text: "After hours of hard work, the Greenleaf Jungle sparkled again! The river was crystal clear, the trees stood tall and clean, and there wasn't a single piece of trash in sight. Fish jumped happily in the water, birds sang cheerful songs, and butterflies danced around the flowers.",
+        image: storyJungleCh5,
+        altText: "Beautiful clean Greenleaf Jungle with happy celebrating animal friends",
+      },
+      {
+        text: "From that day on, Moki, Lila, Tami, and Rex became the Jungle Recycling Heroes! They taught all the other animals about sorting waste correctly. Every animal in the jungle learned which bin to use for different items. The Greenleaf Jungle became the cleanest, happiest forest in the whole world, and it all happened because four friends cared enough to make a difference!",
       }
     ]
   },

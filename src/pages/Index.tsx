@@ -11,7 +11,7 @@ import { toast } from "sonner";
 // Import book cover images
 import bookSortingBins from "@/assets/book-sorting-bins.jpg";
 import bookEarthHero from "@/assets/book-earth-hero.jpg";
-import bookKidsRecycling from "@/assets/book-kids-recycling.jpg";
+import bookJungleRecycling from "@/assets/book-jungle-recycling.jpg";
 import bookBottleJourney from "@/assets/book-bottle-journey.jpg";
 import bookCompostMagic from "@/assets/book-compost-magic.jpg";
 import bookPaperFriends from "@/assets/book-paper-friends.jpg";
@@ -38,12 +38,12 @@ const Index = () => {
     },
     {
       id: 3,
-      title: "Kids Who Care",
-      image: bookKidsRecycling,
+      title: "Moki's Jungle Recycling Adventure",
+      image: bookJungleRecycling,
       color: "eco-yellow",
-      readingTime: "Reading 3 min.",
-      category: "Community action",
-      description: "A group of friends notice trash in their park and decide to make a change. See how working together can clean up our neighborhoods and inspire others!",
+      readingTime: "Reading 4 min.",
+      category: "Jungle adventure",
+      description: "Join Moki the monkey and his jungle friends as they discover pollution problems and learn how to recycle! A fun adventure about teamwork and saving nature.",
     },
     {
       id: 4,
