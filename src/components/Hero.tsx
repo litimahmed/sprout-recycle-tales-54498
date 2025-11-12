@@ -51,7 +51,7 @@ const Hero = () => {
           </div>
           
           {/* Right Column - Image */}
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative rounded-3xl overflow-hidden">
             <img 
               src={heroImage} 
               alt="Eco Heroes - Happy cartoon characters learning about recycling" 

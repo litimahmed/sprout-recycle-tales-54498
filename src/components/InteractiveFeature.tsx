@@ -19,7 +19,7 @@ const InteractiveFeature = ({ onDiscoverClick }: InteractiveFeatureProps) => {
             <div className="space-y-6">
               <div className="inline-block">
                 <span className="text-white/80 text-sm font-medium tracking-wider uppercase">
-                  Interactive Stories
+                  Educative Stories
                 </span>
                 <div className="w-12 h-0.5 bg-white/60 mt-2" />
               </div>
@@ -28,17 +28,13 @@ const InteractiveFeature = ({ onDiscoverClick }: InteractiveFeatureProps) => {
                 Stories where kids learn by making choices about recycling!
               </h2>
               
-              <p className="text-white/90 text-lg">
-                Each decision teaches them about sorting waste, protecting nature, and becoming eco-heroes.
-              </p>
-              
               <Button 
                 onClick={onDiscoverClick}
                 size="lg"
                 variant="secondary"
                 className="bg-white text-eco-green hover:bg-white/90 font-semibold text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
               >
-                Discover our free interactive stories
+                Start Reading Now
               </Button>
             </div>
             

@@ -11,11 +11,11 @@ const AboutUs = () => {
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Image on the left */}
           <div className="order-2 md:order-1">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
+            <div className="rounded-2xl overflow-hidden shadow-lg h-full">
               <img 
                 src={aboutUsImage} 
                 alt="Children learning about recycling and eco-friendly practices in a beautiful natural setting" 
-                className="w-full h-auto object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
